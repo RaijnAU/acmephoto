@@ -2,20 +2,57 @@
   "name": "acmephoto",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "test-cov": "npm run test -- --coverage --watch",
+    "test-cov-view": "browser-sync start --server --port 5150 --files 'coverage/lcov-report/index.html' --startPath 'coverage/lcov-report'",
+    "eject": "react-scripts eject"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,json,css}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "jest": {
+    "coverageReporters": [
+      "lcov"
+    ],
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/enzyme-to-json/serializer"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/setupTests.js",
+      "!src/testUtils/index.js"
+    ]
+  },
   "dependencies": {
-    "lodash": "^4.17.11",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+  "devDependencies": {
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
+    "enzyme-to-json": "^3.3.5",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-jest": "^22.4.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react-hooks": "^1.6.0",
+    "husky": "^1.3.1",
+    "jest-localstorage-mock": "^2.4.0",
+    "lint-staged": "^8.1.5",
+    "prettier": "^1.17.0"
   },
   "browserslist": [
     ">0.2%",
